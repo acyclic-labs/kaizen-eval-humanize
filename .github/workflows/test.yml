@@ -1,7 +1,7 @@
 name: Test
 
-on: [push, pull_request, workflow_dispatch]
-
+on:
+  workflow_dispatch:
 permissions: {}
 
 env:
@@ -62,12 +62,6 @@ jobs:
       - name: Tox tests
         run: |
           uvx --python ${{ matrix.python-version }} --with tox-uv tox -e py
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
-        with:
-          flags: ${{ matrix.os }}
-          name: ${{ matrix.os }} Python ${{ matrix.python-version }}
 
   success:
     if: always()
